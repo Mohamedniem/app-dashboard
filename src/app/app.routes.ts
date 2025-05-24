@@ -18,14 +18,14 @@ export const routes: Routes = [
               {
                 path: 'Categories',
                 loadComponent: () =>
-                  import('./shared/components/business/categories-admin/categories-admin.component').then(
+                  import('./core/pages/categories-admin/categories-admin.component').then(
                     (c) => c.CategoriesAdminComponent
                   ),
               },
               {
                 path: 'Occasions',
                 loadComponent: () =>
-                  import('./shared/components/business/occasions-admin/occasions-admin.component').then(
+                  import('./core/pages/occasions-admin/occasions-admin.component').then(
                     (c) => c.OccasionsAdminComponent
                   ),
               },
