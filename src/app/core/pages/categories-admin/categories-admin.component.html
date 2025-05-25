@@ -5,7 +5,9 @@
         <span class="hidden md:inline">Add new category</span>
     </button>
 </div>
-<app-search-bar-admin (search)="changeSearchValue($event);" [placeholder]="searchBarPlaceholder()"></app-search-bar-admin>
+<!-- <app-search-bar-admin (search)="changeSearchValue($event);" [placeholder]="searchBarPlaceholder()"></app-search-bar-admin> -->
 @if (categoryList().length) {
-    <app-content-table-admin [data]="categoryList()" ></app-content-table-admin>
+    <div class="w-full">
+        <app-content-table-admin [tableType]="'category'" [tableHeaders]="['name', 'products']" [data]="categoryList()" ></app-content-table-admin>
+    </div>
 }

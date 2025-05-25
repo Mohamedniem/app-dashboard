@@ -1,30 +1,29 @@
-<table class="w-full overflow-hidden rounded-tl-lg rounded-tr-lg my-4">
-    <thead class="bg-gray-100 w-full border-b border-gray-300">
+<app-search-bar-admin (search)="changeSearchValue($event);" [placeholder]="searchBarPlaceholder()"></app-search-bar-admin>
+<table class="table-auto w-full overflow-hidden rounded-tl-lg rounded-tr-lg my-4">
+    <thead class="bg-gray-100 border-b border-gray-300">
         <tr>
-            <th class="py-2 px-4 font-semibold w-2/12 text-left">Name</th>
-            <th class="py-2 px-4 font-semibold w-8/12 text-left">Products</th>
-            <th class="py-2 px-4 font-semibold w-2/12"></th>
+            @for (header of tableHeaders; track $index) {
+                <th class="py-2 px-4 font-semibold text-left">{{ header | titlecase }}</th>
+            }
+            <th class="py-2 px-4 font-semibold"></th>
         </tr>
     </thead>
     <tbody>
         @for (item of displayedData(); track $index) {
             <tr class="border-b hover:bg-light-prim-background transition-all">
                 <td class="py-2 px-4 font-semibold">{{ (item?.name | titlecase).split(' ')[0] }}</td>
-                <td class="py-2 px-4 font-normal">{{ item?.totalProducts}} products</td>
-                <td class="py-2 px-4 font-normal text-right md:flex justify-end space-x-2 hidden">
-                    <button (click)="editRow(item?._id)" class="bg-blue-200 text-blue-500 py-1 px-2 rounded-md text-sm flex items-center gap-x-2">
-                        <i class="fa-solid fa-pencil"></i>
-                        <span class="my-0">Edit</span>
+                <td class="py-2 px-4 font-normal">{{ item?.totalProducts }} products</td>
+                <td class="py-2 px-4 font-normal">
+                <div class="flex justify-end gap-2">
+                    <button (click)="setRow(item?._id)" class="bg-blue-200 text-blue-500 py-1 px-2 rounded-md text-sm flex items-center gap-x-2">
+                    <i class="fa-solid fa-pencil"></i>
+                    <span>Edit</span>
                     </button>
                     <button class="bg-red-200 text-red-500 py-1 px-2 rounded-md text-sm flex items-center gap-x-2">
-                        <i class="fa-solid fa-trash-can"></i>
-                        <span class="my-0">Delete</span>
+                    <i class="fa-solid fa-trash-can"></i>
+                    <span>Delete</span>
                     </button>
-                </td>
-                <td>
-                    <button class="w-8 h-8 my-2 border border-gray-300 text-sm rounded-lg font-normal flex justify-center items-center space-x-2 md:hidden">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </button>
+                </div>
                 </td>
             </tr>
         }

@@ -8,7 +8,7 @@ import { ICategory } from '../../interfaces/category/icategory';
 @Component({
   selector: 'app-categories-admin',
   standalone: true,
-  imports: [ContentTableAdminComponent, SearchBarAdminComponent, FormsModule],
+  imports: [ContentTableAdminComponent, FormsModule],
   templateUrl: './categories-admin.component.html',
   styleUrl: './categories-admin.component.scss'
 })
@@ -16,17 +16,12 @@ export class CategoriesAdminComponent implements OnInit {
 
   private readonly _categoriesService = inject(CategoriesService);
 
-  searchBarPlaceholder = signal('Search for a category...');
   searchValue = signal('');
 
   categoryList = signal<ICategory[]>([]);
 
   ngOnInit(): void {
     this.getCategories();
-  }
-
-  changeSearchValue(value: string) {    
-    this.searchValue.set(value);
   }
 
   getCategories(): void {

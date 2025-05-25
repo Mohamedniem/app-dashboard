@@ -1,41 +1,51 @@
 import { NgClass, TitleCasePipe } from '@angular/common';
 import { Component, Input, OnInit, Output, signal } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SearchBarAdminComponent } from "../search-bar-admin/search-bar-admin.component";
 
 @Component({
   selector: 'app-content-table-admin',
   standalone: true,
-  imports: [TitleCasePipe, NgClass, NgxPaginationModule],
+  imports: [TitleCasePipe, NgClass, NgxPaginationModule, SearchBarAdminComponent],
   templateUrl: './content-table-admin.component.html',
   styleUrl: './content-table-admin.component.scss'
 })
 export class ContentTableAdminComponent implements OnInit {
 
-  @Input() data!: object[];
+  @Input({ required: true }) tableType!: string;
+  @Input({ required: true }) tableHeaders!: string[];
+  @Input({ required: true }) data!: object[];
+
+
   @Output() rowId = signal<string>("");
 
+  searchBarPlaceholder = signal('Search for a category...');
+  searchValue = signal('');
+
+  usedData!: object[];
   displayedData = signal<any[]>([]);
   currentPage = signal(1);
   itemsPerPage = signal(10);
   totalPages = signal(0);
+  optionShowed = signal(false);
 
   ngOnInit(): void {
+    this.usedData = this.data;
     this.pagination();
   }
   pagination():void {
-    if (!this.data) {
+    if (!this.usedData) {
       return;
     }
-    this.totalPages.set(this.calcPages(this.data.length));
+    this.totalPages.set(this.calcPages(this.usedData.length));
     this.changeDisplayedData();
   }
   changeDisplayedData(): void {
-    this.displayedData.set(this.data.slice((this.currentPage() - 1) * this.itemsPerPage(), this.currentPage() * this.itemsPerPage()));
+    this.displayedData.set(this.usedData.slice((this.currentPage() - 1) * this.itemsPerPage(), this.currentPage() * this.itemsPerPage()));
   }
   calcPages(dataLength: number): number {
     return Math.ceil(dataLength / this.itemsPerPage());
   }
-
   changePage(page: number): void {
     this.currentPage.set(page);
     this.changeDisplayedData();
@@ -43,8 +53,8 @@ export class ContentTableAdminComponent implements OnInit {
 
   changePageNumbers(page: number): any[] {
     let pageNumbers = [];
-    if (this.calcPages(this.data.length) <= 3) {
-      for (let i = 1; i <= this.calcPages(this.data.length); i++) {
+    if (this.calcPages(this.usedData.length) <= 3) {
+      for (let i = 1; i <= this.calcPages(this.usedData.length); i++) {
         pageNumbers.push(i);
       }
     }
@@ -64,7 +74,22 @@ export class ContentTableAdminComponent implements OnInit {
     return typeof value === 'number';
   }
 
-  editRow(id: string): void {
+  setRow(id: string): void {
     this.rowId.set(id);
+  }
+
+  changeSearchValue(value: string) {
+    this.usedData = this.data;
+    this.searchValue.set(value);
+    console.log("Search value changed to:", this.searchValue());
+    this.usedData = this.usedData.filter((item: any) => {
+      return Object.values(item).some((val: any) => {
+        if (typeof val === 'string') {
+          return val.toLowerCase().includes(this.searchValue().toLowerCase());
+        }
+        return false;
+      });
+    })
+    this.pagination()
   }
 }
