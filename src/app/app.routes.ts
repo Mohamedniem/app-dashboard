@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
+  
   { path: '', redirectTo: 'maindashboard', pathMatch: 'full' },
   {
           path: 'maindashboard',
@@ -8,12 +9,30 @@ export const routes: Routes = [
             import('./core/pages/main-dashboard/main-dashboard.component').then(
               (c) => c.MainDashboardComponent
             ),children:[
+              { path: '', redirectTo: 'overview', pathMatch: 'full' },
               {
                 path: 'overview',
                 loadComponent: () =>
                   import('./shared/components/business/overview-admin/overview-admin.component').then(
                     (c) => c.OverviewAdminComponent
-                  ),
+                  ),children:[
+                    { path: '', redirectTo: 'monthly', pathMatch: 'full' },
+                    {
+                      path: 'monthly',
+                      loadComponent: () =>
+                        import('./shared/components/business/revenue-month-diagram/revenue-month-diagram.component').then(
+                          (c) => c.RevenueMonthDiagramComponent
+                        ),
+                     },
+                    {
+                      path: 'weekly',
+                      loadComponent: () =>
+                        import('./shared/components/business/revenue-week-diagram/revenue-week-diagram.component').then(
+                          (c) => c.RevenueWeekDiagramComponent
+                        ),
+                     },
+
+                  ]
               },
               {
                 path: 'Categories',
