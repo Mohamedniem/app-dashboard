@@ -9,12 +9,13 @@ import { FlowbiteService } from './core/services/flowbite.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { initFlowbite } from 'flowbite';
 import { MainDashboardComponent } from "./core/pages/main-dashboard/main-dashboard.component";
+import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     NgxSpinnerModule,
-    MainDashboardComponent
+    RouterOutlet
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
