@@ -1,9 +1,10 @@
-import { Component, inject, Inject, OnInit } from '@angular/core';
+import { Component, inject, Inject, OnDestroy, OnInit } from '@angular/core';
 import { Chart, ChartModule } from 'angular-highcharts'
 import { PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { OrderstatusService } from '../../../services/orderstatus.service';
 import { Iorderstatus } from '../../../../core/interfaces/iorderstatus';
+import { Subscription, map } from 'rxjs';
 
 @Component({
   selector: 'app-status-diagram',
@@ -12,17 +13,17 @@ import { Iorderstatus } from '../../../../core/interfaces/iorderstatus';
   templateUrl: './status-diagram.component.html',
   styleUrl: './status-diagram.component.scss'
 })
-export class StatusDiagramComponent implements OnInit{
+export class StatusDiagramComponent implements OnInit , OnDestroy{
 
   
 constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
 Orderstatus:Iorderstatus[]=[]
 piechart: Chart | undefined;
+getOrderDiagram !:Subscription
 
 count(){
-  let x=this.Orderstatus.forEach(element =>element.count/element.count++)
-  console.log(x);
+  
   
 }
 
@@ -33,17 +34,22 @@ isBrowser = false;
 ngOnInit() {
     this.isBrowser = isPlatformBrowser(this.platformId);
     this.count()
-
-
-this._OrderstatusService.getOrderstatus().subscribe({
-  next: (data) => {console.log(data.statistics);
-    this.Orderstatus=data.statistics.ordersByStatus
-    this.piechartm()
+    this.getOrderstateDiagram()
   }
+
+
+  getOrderstateDiagram(){
+    this.getOrderDiagram=this._OrderstatusService.getOrderstatus().subscribe({
+      next: (data) => {console.log(data.statistics);
+      this.Orderstatus=data.statistics.ordersByStatus.filter((e:any) => e !== null)
+     
+      this.piechartm()
+    },
+    error :(err)=>{console.log(err)}
 })
+ 
 
 
-  
   }
 
   piechartm(){
@@ -89,6 +95,11 @@ this._OrderstatusService.getOrderstatus().subscribe({
           
         ]
       })
+  }
+
+
+  ngOnDestroy(): void {
+    this.getOrderDiagram.unsubscribe()
   }
 
         

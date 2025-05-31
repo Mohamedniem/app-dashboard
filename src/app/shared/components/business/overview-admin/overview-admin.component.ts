@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { StatusDiagramComponent } from "../status-diagram/status-diagram.component";
 import { RevenueMonthDiagramComponent } from "../revenue-month-diagram/revenue-month-diagram.component";
 import { OverallService } from '../../../services/overall.service';
@@ -10,6 +10,7 @@ import { ScrollerModule } from 'primeng/scroller';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ProductsService } from '../../../services/products.service';
 import { Itopselling } from '../../../../core/interfaces/itopselling';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { Itopselling } from '../../../../core/interfaces/itopselling';
   templateUrl: './overview-admin.component.html',
   styleUrl: './overview-admin.component.scss'
 })
-export class OverviewAdminComponent implements OnInit  {
+export class OverviewAdminComponent implements OnInit ,OnDestroy {
   constructor (private _OverallService:OverallService ){
   }
    _PLATFORM_ID=inject(PLATFORM_ID)
@@ -29,20 +30,17 @@ export class OverviewAdminComponent implements OnInit  {
   allCateogries:IallCateogries[]=[]
    items!: string[];
    topSellingProducts:Itopselling[]=[]
+   getOverall !:Subscription
+   getAllCateogries !:Subscription
+   gettopsell !:Subscription
 
 
 
 
 
   ngOnInit(): void {
-    if(isPlatformBrowser(this._PLATFORM_ID)){
-
-      localStorage.setItem("token" , 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjgyYjdiOGMxNDMzYTY2NmM4ZGU1ZTFiIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDc5NDIxODJ9.BbwcpYorvzNqmUmlZEDaZUqZMubgG52iq3J0HJquqCU')
-      
-    }
-
+    this.PlatformBrowser()
     this.items = Array.from({ length: this.allCateogries.length });
-
     this.getOverallData()
     this.AllCateogriesData()
     this.gettopselling()
@@ -54,33 +52,49 @@ export class OverviewAdminComponent implements OnInit  {
 
 
 
+ PlatformBrowser(){
+  if(isPlatformBrowser(this._PLATFORM_ID)){
+      localStorage.setItem("token" , 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiNjgyYjdiOGMxNDMzYTY2NmM4ZGU1ZTFiIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NDc5NDIxODJ9.BbwcpYorvzNqmUmlZEDaZUqZMubgG52iq3J0HJquqCU')  
+    }
 
+ }
 
   getOverallData(){
-    this._OverallService.getOverall().subscribe({
+    this.getOverall=this._OverallService.getOverall().subscribe({
       next: (data) => {this.overallData.push(data.statistics)
         console.log(this.overallData)
-      }
+      },
+      error: (err)=>{console.log(err)}
+      
     })
 
   }
 
   AllCateogriesData(){
-    this._AllCateogriesService.getAllCateogries().subscribe({
+    this.getAllCateogries=this._AllCateogriesService.getAllCateogries().subscribe({
       next: (data) =>{this.allCateogries=data.statistics
         console.log(this.allCateogries);
-      }
+      },
+      error: (err)=>{console.log(err)}
     })
     
   }
 
   gettopselling(){
-    this._ProductsService.getproducts().subscribe({
+    this.gettopsell=this._ProductsService.getproducts().subscribe({
       next: (pro) =>{console.log(pro.statistics.topSellingProducts)
         this.topSellingProducts=pro.statistics.topSellingProducts
-      }
+      },
+      error: (err)=>{console.log(err)}
     })
 
+  }
+
+  ngOnDestroy(): void {
+    this.getOverall.unsubscribe()
+    this.getAllCateogries.unsubscribe()
+    this.gettopsell.unsubscribe()
+    
   }
 
 
