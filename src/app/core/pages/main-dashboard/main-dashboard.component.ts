@@ -4,12 +4,11 @@ import { SidebarComponent } from "../../../shared/components/business/sidebar/si
 import { FooterDashboardComponent } from "../../../shared/components/business/footer-dashboard/footer-dashboard.component";
 import { OverviewAdminComponent } from "../../../shared/components/business/overview-admin/overview-admin.component";
 import { RouterOutlet } from '@angular/router';
-import { CategoriesAdminComponent } from "../categories-admin/categories-admin.component";
 
 @Component({
   selector: 'app-main-dashboard',
   standalone: true,
-  imports: [NavbarDashboardComponent, SidebarComponent, FooterDashboardComponent, OverviewAdminComponent, RouterOutlet, CategoriesAdminComponent],
+  imports: [NavbarDashboardComponent, SidebarComponent, FooterDashboardComponent,RouterOutlet],
   templateUrl: './main-dashboard.component.html',
   styleUrl: './main-dashboard.component.scss'
 })

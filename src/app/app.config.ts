@@ -22,6 +22,9 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { loadingInterceptor } from './core/interceptor/loading.interceptor';
+import { providePrimeNG } from 'primeng/config';
+import Aura from '@primeng/themes/aura';
+import { tokenInterceptor } from './core/interceptor/token.interceptor';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -31,6 +34,11 @@ export function HttpLoaderFactory(http: HttpClient) {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
+    providePrimeNG({ 
+            theme: {
+                preset: Aura
+            }
+        }),
     provideRouter(
       routes,
       withViewTransitions(),
@@ -38,7 +46,7 @@ export const appConfig: ApplicationConfig = {
     ),
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch(), withInterceptors([ loadingInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
     importProvidersFrom(
       BrowserAnimationsModule,
       TranslateModule.forRoot({

@@ -1,16 +1,15 @@
 <div class="flex ">
-    <div>
-        <app-sidebar></app-sidebar>
+    <div class="w-[303px] pe-28 ">
+        <div class="fixed ">
+            <app-sidebar></app-sidebar>
+        </div>
     </div>
     <div class="w-full">
-        <app-navbar-dashboard></app-navbar-dashboard>
-        <!-- <app-overview-admin></app-overview-admin> -->
-        <section class="bg-[#FBFBFD] p-4">
-            <div class="px-6 py-8 rounded-2xl bg-white">
-                <!-- <app-categories-admin></app-categories-admin> -->
-                <router-outlet></router-outlet>
-            </div>
-        </section>
-        <!-- <app-footer-dashboard></app-footer-dashboard> -->
+        <app-navbar-dashboard class="fixed "></app-navbar-dashboard>
+        <router-outlet ></router-outlet>
+        <app-footer-dashboard></app-footer-dashboard>
+        
     </div>
+
+    
 </div>

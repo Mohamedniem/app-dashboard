@@ -5,8 +5,12 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './occasions-admin.component.html',
-  styleUrl: './occasions-admin.component.scss'
+  styleUrl: './occasions-admin.component.scss',
+  providers: []
 })
 export class OccasionsAdminComponent {
 
+
 }
+
+
