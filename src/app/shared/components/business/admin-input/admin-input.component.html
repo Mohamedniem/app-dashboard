@@ -1,0 +1,9 @@
+<label [for]="id" class="flex items-center gap-x-1 font-medium">
+    <span>{{label}}</span>
+    @if (isRequired) {
+        <span class="text-red-600">*</span>
+    }
+</label>
+<div class="border border-gray-300 rounded-xl py-2 px-4 w-full flex {{classes}}">
+    <input (input)="onInputChange($event)" [type]="type" [id]="id" [accept]="accept" [placeholder]="placeholder" class="w-full border-none focus:outline-none focus:ring-0"/>
+</div>

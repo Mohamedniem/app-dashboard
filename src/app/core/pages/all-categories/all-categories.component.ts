@@ -1,18 +1,18 @@
-import { CategoriesService } from './../../services/categories/categories.service';
+import { Component, inject, signal } from '@angular/core';
+import { ContentTableAdminComponent } from '../../../shared/components/business/content-table-admin/content-table-admin.component';
 import { FormsModule } from '@angular/forms';
-import { ContentTableAdminComponent } from './../../../shared/components/business/content-table-admin/content-table-admin.component';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { CategoriesService } from '../../services/categories/categories.service';
+import { Router } from '@angular/router';
 import { ICategory } from '../../interfaces/category/icategory';
-import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'app-categories-admin',
+  selector: 'app-all-categories',
   standalone: true,
-  imports: [ContentTableAdminComponent, FormsModule, RouterOutlet],
-  templateUrl: './categories-admin.component.html',
-  styleUrl: './categories-admin.component.scss'
+  imports: [ContentTableAdminComponent, FormsModule],
+  templateUrl: './all-categories.component.html',
+  styleUrl: './all-categories.component.scss'
 })
-export class CategoriesAdminComponent implements OnInit {
+export class AllCategoriesComponent {
 
   private readonly _categoriesService = inject(CategoriesService);
   private readonly _router = inject(Router)
@@ -39,8 +39,7 @@ export class CategoriesAdminComponent implements OnInit {
   }
 
   addCategory():void {
-    console.log('Adding new category');
-    this._router.navigate(['/maindashboard/categories/add']);
+    this._router.navigate(['categories/add']);
   }
 
   deleteCategory(categoryId: string): void {

@@ -30,6 +30,4 @@ export class CategoriesService {
   updateCategory(id: string, data: any): Observable<any> {
     return this._httpClient.put(`${environment.baseUrl}api/v1/categories/${id}`, data, { headers: this.headers });
   }
-
-  // addCategory()
 }

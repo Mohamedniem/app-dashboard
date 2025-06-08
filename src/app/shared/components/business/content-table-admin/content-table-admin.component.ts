@@ -1,5 +1,5 @@
 import { NgClass, TitleCasePipe } from '@angular/common';
-import { Component, Input, OnInit, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, signal } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SearchBarAdminComponent } from "../search-bar-admin/search-bar-admin.component";
 
@@ -17,7 +17,8 @@ export class ContentTableAdminComponent implements OnInit {
   @Input({ required: true }) data!: object[];
 
 
-  @Output() rowId = signal<string>("");
+  @Output() deleteId = new EventEmitter<string>();
+  @Output() editId = new EventEmitter<string>();
 
   searchBarPlaceholder = signal('Search for a category...');
   searchValue = signal('');
@@ -74,10 +75,6 @@ export class ContentTableAdminComponent implements OnInit {
     return typeof value === 'number';
   }
 
-  setRow(id: string): void {
-    this.rowId.set(id);
-  }
-
   changeSearchValue(value: string) {
     this.usedData = this.data;
     this.searchValue.set(value);
@@ -90,6 +87,6 @@ export class ContentTableAdminComponent implements OnInit {
         return false;
       });
     })
-    this.pagination()
-  }
+    this.pagination();
+  };
 }

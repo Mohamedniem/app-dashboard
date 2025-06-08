@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InputBarAdminComponent } from './search-bar-admin.component';
+import { AdminInputComponent } from './admin-input.component';
 
-describe('SearchBarAdminComponent', () => {
-  let component: InputBarAdminComponent;
-  let fixture: ComponentFixture<InputBarAdminComponent>;
+describe('AdminInputComponent', () => {
+  let component: AdminInputComponent;
+  let fixture: ComponentFixture<AdminInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InputBarAdminComponent]
+      imports: [AdminInputComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(InputBarAdminComponent);
+    fixture = TestBed.createComponent(AdminInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
