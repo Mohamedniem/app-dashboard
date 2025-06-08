@@ -39,7 +39,7 @@ export class AllCategoriesComponent {
   }
 
   addCategory():void {
-    this._router.navigate(['categories/add']);
+    this._router.navigate(['maindashboard/categories/add']);
   }
 
   deleteCategory(categoryId: string): void {

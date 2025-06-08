@@ -1,6 +1,6 @@
 import { CategoriesService } from './../../services/categories/categories.service';
 import { FormsModule } from '@angular/forms';
-import { ContentTableAdminComponent } from './../../../shared/components/business/content-table-admin/content-table-admin.component';
+// import { ContentTableAdminComponent } from './../../../shared/components/business/content-table-admin/content-table-admin.component';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ICategory } from '../../interfaces/category/icategory';
 import { Router, RouterOutlet } from '@angular/router';
@@ -8,7 +8,7 @@ import { Router, RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-categories-admin',
   standalone: true,
-  imports: [ContentTableAdminComponent, FormsModule, RouterOutlet],
+  imports: [FormsModule, RouterOutlet],
   templateUrl: './categories-admin.component.html',
   styleUrl: './categories-admin.component.scss'
 })
