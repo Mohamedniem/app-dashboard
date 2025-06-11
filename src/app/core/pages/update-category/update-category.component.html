@@ -1,1 +1,17 @@
-<p>update-category works!</p>
+@if (category) {
+<div class="flex justify-between">
+    <h1 class="font-semibold text-2xl">Update Category: {{category.name | titlecase}}</h1>
+</div>
+<div class="mt-4">
+    <app-admin-input
+        type="text"
+        label="Name"
+        [id]="category._id"
+        [placeholder]="category.name | titlecase">
+    </app-admin-input>
+    <button class="border border-gray-300 p-2 rounded-lg text-blue-500">
+        <i class="fa-regular fa-file-image"></i>
+        <span class="text-sm">View Category Image</span>
+    </button>
+</div>
+}

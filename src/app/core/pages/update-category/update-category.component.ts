@@ -3,11 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CategoriesService } from '../../services/categories/categories.service';
 import { ICategoryById } from '../../interfaces/category/icategory';
+import { TitleCasePipe } from '@angular/common';
+import { AdminInputComponent } from "../../../shared/components/business/admin-input/admin-input.component";
 
 @Component({
   selector: 'app-update-category',
   standalone: true,
-  imports: [],
+  imports: [TitleCasePipe, AdminInputComponent],
   templateUrl: './update-category.component.html',
   styleUrl: './update-category.component.scss'
 })
