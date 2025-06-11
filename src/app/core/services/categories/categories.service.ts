@@ -14,6 +14,10 @@ export class CategoriesService {
     return this._httpClient.get(`${environment.baseUrl}api/v1/statistics/categories`);
   };
 
+  getCategory(categoryId: string): Observable<any> {
+    return this._httpClient.get(`${environment.baseUrl}api/v1/categories/${categoryId}`);
+  }
+
   deleteCategory(id: string): Observable<any> {
     return this._httpClient.delete(`${environment.baseUrl}api/v1/categories/${id}`);
   };

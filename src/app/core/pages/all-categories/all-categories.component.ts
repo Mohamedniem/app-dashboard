@@ -55,8 +55,6 @@ export class AllCategoriesComponent {
   };
 
   updateCategory(categoryId: string): void {
-    console.log('Editing category with ID:', categoryId);
-    
     this._router.navigate(['maindashboard/categories/update', categoryId]);
   };
 
