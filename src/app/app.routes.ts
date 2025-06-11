@@ -57,7 +57,7 @@ export const routes: Routes = [
               ),
           },
           {
-            path: 'update',
+            path: 'update/:categoryId',
             loadComponent: () =>
               import(
                 './core/pages/update-category/update-category.component'
