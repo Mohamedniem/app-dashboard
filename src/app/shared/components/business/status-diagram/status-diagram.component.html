@@ -18,64 +18,58 @@
 
                             <div class="flex justify-between mx-4 mb-[14px]">
                                 <div class="flex items-center">
-                                    <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                       <circle cx="5" cy="5.5" r="5" fill="#197FD2"/>
-                                    </svg>
-        
-                                    <p class="ms-[5px]">{{item._id}}</p>
+                                    @switch (item._id) {
+                                        @case ("canceled") {
+                                            <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="5" cy="5.5" r="5" fill="#E93538"/>
+                                        </svg>
+            
+                                        <p class="ms-[5px]">{{item._id}}</p>
+
+                                        }
+                                        @case ("pending") {
+                                            <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="5" cy="5.5" r="5" fill="#F82BA9"/>
+                                        </svg>
+            
+                                        <p class="ms-[5px]">{{item._id}}</p>
+
+                                        }
+                                        @case ("inProgress") {
+                                            <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="5" cy="5.5" r="5" fill="#197FD2"/>
+                                        </svg>
+            
+                                        <p class="ms-[5px]">{{item._id}}</p>
+
+                                        }
+                                        @case ("completed") {
+                                            <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="5" cy="5.5" r="5" fill="#00A85F"/>
+                                        </svg>
+            
+                                        <p class="ms-[5px]">{{item._id}}</p>
+
+                                        }
+
+                                    }
+
+                                        <!-- <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="5" cy="5.5" r="5" fill="#197FD2"/>
+                                        </svg>
+            
+                                        <p class="ms-[5px]">{{item._id}}</p> -->
         
                                 </div>
                                 <div>
-                                    <p>{{item.count}} (33%)</p>
+                                    <p>{{item.count}} <span>({{item.count/allcount | percent }})</span></p>
                                 </div>
                             </div>
                         }
 
 
                     }
-                    <!-- <div class="flex justify-between mx-4 mb-[14px]">
-                        <div class="flex items-center">
-                            <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <circle cx="5" cy="5.5" r="5" fill="#E93538"/>
-                            </svg>
-
-
-                            <p class="ms-[5px]">Completed</p>
-
-                        </div>
-                        <div>
-                            <p>{{Orderstatus[0].count}}  (33%)</p>
-                        </div>
-                    </div>
-                    <div class="flex justify-between mx-4 mb-[14px]">
-                        <div class="flex items-center">
-                            <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <circle cx="5" cy="5.5" r="5" fill="#E93538"/>
-                            </svg>
-
-
-                            <p class="ms-[5px]">Inprogress</p>
-
-                        </div>
-                        <div>
-                            <p>{{Orderstatus[1].count}}  (33%)</p>
-                        </div>
-                    </div>
                     
-                    <div class="flex justify-between mx-4 mb-[14px]">
-                        <div class="flex items-center">
-                            <svg width="10" height="11" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <circle cx="5" cy="5.5" r="5" fill="#E93538"/>
-                            </svg>
-
-
-                            <p class="ms-[5px]">Cancelled</p>
-
-                        </div>
-                        <div>
-                            <p>{{Orderstatus[2].count}}(33%)</p>
-                        </div>
-                    </div> -->
 
   
 </div>
