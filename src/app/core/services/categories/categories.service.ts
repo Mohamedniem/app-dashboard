@@ -8,15 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CategoriesService {
 
-  // headers = new HttpHeaders();
-
   constructor(private _httpClient: HttpClient) {
-    // if (typeof localStorage !== 'undefined') {
-    //   const token = localStorage.getItem('token');
-    //   if (token) {
-    //     this.headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
-    //   }
-    // }
   }
 
   getCategories(): Observable<any> {
