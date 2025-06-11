@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { AdminInputComponent } from "../../../shared/components/business/admin-input/admin-input.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CategoriesService } from '../../services/categories/categories.service';
 
 @Component({
   selector: 'app-add-category',
@@ -12,6 +13,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class AddCategoryComponent implements OnInit{
 
   private readonly _formBuilder = inject(FormBuilder);
+  private readonly _categoriesService = inject(CategoriesService);
 
   addCategoryForm!:FormGroup;
 
@@ -31,8 +33,18 @@ export class AddCategoryComponent implements OnInit{
       image: [null, [Validators.required]]
     });
   };
+
+  // Feature not working due to missing super admin credentials
   addCatSubmit(): void {
     console.log(this.addCategoryForm.value);
-    
+    this._categoriesService.addCategory(this.addCategoryForm.value).subscribe({
+      next: (response) => {
+        console.log('Category added successfully:', response);
+        this.addCategoryForm.reset();
+      },
+      error: (error) => {
+        console.error('Error adding category:', error);
+      }
+    });
   };
 }
