@@ -15,7 +15,7 @@ import { ICategory } from '../../interfaces/category/icategory';
 export class AllCategoriesComponent {
 
   private readonly _categoriesService = inject(CategoriesService);
-  private readonly _router = inject(Router)
+  private readonly _router = inject(Router);
 
   searchValue = signal('');
 
@@ -36,14 +36,14 @@ export class AllCategoriesComponent {
         console.error('Error fetching categories:', err);
       }
     });
-  }
+  };
 
   addCategory():void {
     this._router.navigate(['maindashboard/categories/add']);
-  }
+  };
 
+  // Feature not working due to the unavailability of a super admin credentials
   deleteCategory(categoryId: string): void {
-    console.log('Deleting category with ID:', categoryId);
     this._categoriesService.deleteCategory(categoryId).subscribe({
       next: () => {
         this.getCategories();
@@ -52,6 +52,10 @@ export class AllCategoriesComponent {
         console.error('Error deleting category:', err);
       }
     })
-  }
+  };
+
+  editCategory(categoryId: string): void {
+    this._router.navigate(['maindashboard/categories/edit', categoryId]);
+  };
 
 }

@@ -7,6 +7,6 @@
 </div>
 @if (categoryList().length) {
     <div class="w-full">
-        <app-content-table-admin (deleteId)="deleteCategory($event)" [tableType]="'category'" [tableHeaders]="['name', 'products']" [data]="categoryList()" ></app-content-table-admin>
+        <app-content-table-admin (deleteId)="deleteCategory($event)" (editId)="editCategory($event)" [tableType]="'category'" [tableHeaders]="['name', 'products']" [data]="categoryList()" ></app-content-table-admin>
     </div>
 }
