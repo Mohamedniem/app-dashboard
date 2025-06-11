@@ -10,3 +10,13 @@ export interface ICategory {
   totalProducts: number;
   totalRevenue: number;
 }
+
+export interface ICategoryById {
+  _id: string;
+  name: string;
+  slug: string;
+  image: string;
+  createdAt: string;
+  updatedAt: string;
+  isSuperAdmin?: boolean;
+}
