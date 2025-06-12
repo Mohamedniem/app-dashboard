@@ -5,11 +5,12 @@ import { CategoriesService } from '../../services/categories/categories.service'
 import { ICategoryById } from '../../interfaces/category/icategory';
 import { TitleCasePipe } from '@angular/common';
 import { AdminInputComponent } from "../../../shared/components/business/admin-input/admin-input.component";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-update-category',
   standalone: true,
-  imports: [TitleCasePipe, AdminInputComponent],
+  imports: [TitleCasePipe, AdminInputComponent, ReactiveFormsModule, FormsModule],
   templateUrl: './update-category.component.html',
   styleUrl: './update-category.component.scss'
 })
@@ -42,6 +43,21 @@ export class UpdateCategoryComponent implements OnInit {
       },
       error: (err) => {
         console.error('Error fetching category:', err);
+      }
+    });
+  };
+  // Feature not working due to missing super admin credentials
+  updateCategory(event: any): void {
+    const updatedCategory = {
+      name: event.target.value,
+      image: this.category.image
+    };
+    this._categoriesService.updateCategory(this.categoryId, updatedCategory).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
+      next: (res) => {
+        this.getCategoryFromBackend();
+      },
+      error: (err) => {
+        console.error('Error updating category:', err);
       }
     });
   };
