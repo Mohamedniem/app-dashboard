@@ -2,7 +2,7 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CategoriesService } from '../../services/categories/categories.service';
-import { ICategoryById } from '../../interfaces/category/icategory';
+import { ICategory } from '../../interfaces/category/icategory';
 import { TitleCasePipe } from '@angular/common';
 import { AdminInputComponent } from "../../../shared/components/business/admin-input/admin-input.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -21,7 +21,7 @@ export class UpdateCategoryComponent implements OnInit {
   private readonly _destroyRef = inject(DestroyRef);
 
   categoryId!: string ;
-  category!: ICategoryById;
+  category!: ICategory;
 
   ngOnInit(): void {
     this.getCategory();
@@ -39,7 +39,9 @@ export class UpdateCategoryComponent implements OnInit {
   getCategoryFromBackend(): void {
     this._categoriesService.getCategory(this.categoryId).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
       next: (res) => {
-        this.category = res.category;
+        if ('category' in res) {
+          this.category = res.category;
+        }
       },
       error: (err) => {
         console.error('Error fetching category:', err);

@@ -1,22 +1,25 @@
 
-export interface CategoryResponse {
+export interface IGetCategoriesResponse {
   message: string;
-  statistics: ICategory[];
+  categories: ICategory[];
+};
+export interface IGetCategoryResponse {
+  message: string;
+  category: ICategory;
+};
+export interface IErrorResponse {
+  message: string;
+  error: string;
 }
 
 export interface ICategory {
-  _id: string;
-  name: string;
-  totalProducts: number;
-  totalRevenue: number;
-}
-
-export interface ICategoryById {
   _id: string;
   name: string;
   slug: string;
   image: string;
   createdAt: string;
   updatedAt: string;
-  isSuperAdmin?: boolean;
+  isSuperAdmin: boolean;
+  productsCount: number;
 }
+

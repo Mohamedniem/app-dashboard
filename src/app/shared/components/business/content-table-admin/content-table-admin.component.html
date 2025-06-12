@@ -12,7 +12,7 @@
         @for (item of displayedData(); track $index) {
             <tr class="border-b hover:bg-light-prim-background transition-all">
                 <td class="py-2 px-4 font-semibold">{{ (item?.name | titlecase).split(' ')[0] }}</td>
-                <td class="py-2 px-4 font-normal">{{ item?.totalProducts }} products</td>
+                <td class="py-2 px-4 font-normal">{{ item?.productsCount }} products</td>
                 <td class="py-2 px-4 font-normal">
                 <div class="flex justify-end gap-2">
                     <button (click)="editId.emit(item?._id)" class="bg-blue-200 text-blue-500 py-1 px-2 rounded-md text-sm flex items-center gap-x-2">

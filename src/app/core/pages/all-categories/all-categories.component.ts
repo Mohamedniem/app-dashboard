@@ -17,7 +17,7 @@ export class AllCategoriesComponent {
 
   private readonly _categoriesService = inject(CategoriesService);
   private readonly _router = inject(Router);
-  private readonly _destroyRef = inject(DestroyRef); // 👈 Required for takeUntilDestroyed()
+  private readonly _destroyRef = inject(DestroyRef);
 
   searchValue = signal('');
   categoryList = signal<ICategory[]>([]);
@@ -31,8 +31,8 @@ export class AllCategoriesComponent {
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: (res) => {
-          if (res?.statistics) {
-            this.categoryList.set(res.statistics);
+          if ('categories' in res) {
+            this.categoryList.set(res.categories);
           }
         },
         error: (err) => {
