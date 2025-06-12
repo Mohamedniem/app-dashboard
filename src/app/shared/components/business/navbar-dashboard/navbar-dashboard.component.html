@@ -1,15 +1,33 @@
 <div class=" w-full bg-white">
-    <div class="h-[65px] w-full  border-b flex items-center justify-between">
+    <div class="h-[65px] w-full  border-b border-l flex items-center justify-between">
 
         <div class="flex items-center">
             <div class="my-[10px] ms-4 me-3">
                 <img class="w-[50px] h-[50px] md:hidden" src="Group3.png" alt="">
             </div>
-            <h4>Dashboard</h4>
+            <h4 class="text-gray500 text-sm">Dashboard</h4>
         </div>
-        <div class="md:hidden me-6">
-            <img src="Avatar.png" alt="">
-             
+        <div class="flex items-center md:hidden me-2">
+            <img src="Avatar.png" class="w-10 h-10" alt="">
+            
+            
+            <div class=" text-2xl pt-3 ">
+                <button id="dropdownDefaultButton1" data-dropdown-toggle="dropdown1" class="text-black font-medium rounded-lg text-sm px-2 py-2.5 text-center inline-flex items-center " type="button">
+                  <i class="fa-solid fa-bars text-xl "></i>
+                </button>
+                </div>
+
+                <div id="dropdown1" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-44 dark:bg-gray-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDefaultButton1">
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i class="fa-regular fa-user"></i>  profile</a>
+                        </li>
+                        <li>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                        </li>
+                       
+                    </ul>
+                </div>
             
         </div>
 
