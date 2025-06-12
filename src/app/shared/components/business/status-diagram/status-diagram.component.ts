@@ -68,17 +68,32 @@ ngOnInit() {
 }
 
   piechartm(){
-    const data = this.Orderstatus.map((status, index) => {
-    const colors = ['#00A85F', '#E93538', '#197FD2', '#F7F7F7', '#F82BA9'];
-    return {
-      name: status._id,
-      y: parseFloat(((status.count / this.allcount) * 100).toFixed(0)),
-      color: colors[index % colors.length]
-    };
-  });
+  
+      const data = this.Orderstatus.filter(status => status._id !== 'null' &&  status._id !== 'pending' ).map((status, index) => {
+          let color = '';
+
+          // Example condition based on status._id
+          if (status._id === 'completed') {
+            color = '#00A85F'; // Green
+          } else if (status._id === 'cancelled') {
+            color = '#E93538'; // Red
+          } else if (status._id === 'pending') {
+            color = '#F82BA9'; // Blue
+          } else if (status._id === 'inProgress') {
+            color = '#197FD2'; // Default gray or fallback
+          }
+
+          return {
+            name: '',
+            y: parseFloat(((status.count / this.allcount) * 100).toFixed(0)),
+            color: color
+          };
+        });
 
      this.piechart = new Chart({
-          chart : {type:'pie',plotShadow:false},
+          chart : {type:'pie',
+            plotShadow:false,
+          },
           credits:{enabled:false},
           plotOptions:{
               pie:{
@@ -87,7 +102,16 @@ ngOnInit() {
                   borderColor:'',
                   slicedOffset:0,
                   dataLabels:{
-                      connectorWidth:0
+                        enabled: true, // Show data labels
+                        format: '{point.y}%', // Show percentage permanently
+                        style: {
+                          fontSize: '14px',
+                          color: '#000',
+                        },
+                        backgroundColor: '#ECEAF8', // Label background
+                        borderRadius: 50,            // Rounded corners
+                        padding: 5,                  // Space inside background
+                        distance: -12,
                   }
               }
           },
@@ -107,28 +131,8 @@ ngOnInit() {
            },
            series:[{
           type :'pie',
-          // data:['jan','kik','tit','pop'],
-          // zones:
           data:data
          
-          // data :[
-          //   {
-          //     name: this.Orderstatus[0]._id, y:this.Orderstatus[0].count/this.allcount*100 ,color:'#00A85F'
-          //   },
-          //   {
-          //     name: this.Orderstatus[1]._id,y:this.Orderstatus[1].count/this.allcount*100 ,color:'#E93538'
-          //   },
-          //   {
-          //     name: this.Orderstatus[2]._id,y:this.Orderstatus[2].count/this.allcount*100 ,color:'#197FD2'
-          //   },
-          //   {
-          //    name: this.Orderstatus[3]._id,y:this.Orderstatus[3].count/this.allcount*100 ,color:'#F7F7F7'
-          //   }
-          //   ,
-          //   {
-          //    name: this.Orderstatus[4]._id,y:this.Orderstatus[4].count/this.allcount*100 ,color:'#F82BA9'
-          //   }
-          // ]
         }
           
         ]
