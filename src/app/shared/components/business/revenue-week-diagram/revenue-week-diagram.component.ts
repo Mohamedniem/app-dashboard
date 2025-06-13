@@ -34,7 +34,7 @@ export class RevenueWeekDiagramComponent implements OnInit , OnDestroy {
         this.weekrevenu=this._Revenu.getOrderstatus().subscribe({
           next: (data) =>{console.log(data.statistics.dailyRevenue);
             this.Revenu=data.statistics.dailyRevenue.map((ele: any) => ele.revenue).reverse()
-            this.dayRevenu=data.statistics.dailyRevenue.map((ele: any) => ele.revenue)
+            this.dayRevenu=data.statistics.dailyRevenue.map((ele: any) => ele._id)
             this.createChart()
           },
           error: (err)=>{console.log(err)}
@@ -46,6 +46,10 @@ export class RevenueWeekDiagramComponent implements OnInit , OnDestroy {
   
     this.lineChart = new Chart({
       chart:{type:"areaspline"},
+      credits:{
+        text:'',
+        href:''
+      },
       title: {text: "Revenue by Month"},
       xAxis:{
         categories: this.dayRevenu
