@@ -1,8 +1,8 @@
 <div class="bg-admin ">
     <div class="mt-16">
-        <div class="flex gap-4">
-            <div class="w-[42%] ">
-                <div class="mt-[26px] ms-4">
+        <div class=" md:flex flex-wrap">
+            <div class="w-full  md:w-[44%] ">
+                <div class="mt-[26px] max-sm:mx-4 md:ms-4">
                     <div class="grid grid-cols-2 gap-4 p-[26px]  bg-white rounded-xl">
                         <div class=" bg-admin rounded-xl" >
                             <div class="p-4">
@@ -12,7 +12,7 @@
                                     </svg>
                                 </div>
                                 @if (overallData.length>0) {
-                                    <h3>{{overallData[0].totalProducts}}</h3>
+                                    <h3 class="text-xl md:text-2xl font-semibold text-text-f82ba9">{{overallData[0].totalProducts}}</h3>
 
                                 }
                                 <p>Total products</p>
@@ -29,7 +29,7 @@
         
                                 </div>
                                 @if (overallData.length>0) {
-                                <h3>{{overallData[0].totalOrders}}</h3> }
+                                <h3 class="text-xl md:text-2xl font-semibold text-0063D0">{{overallData[0].totalOrders}}</h3> }
                                 <p>Total orders</p>
     
                             </div>
@@ -45,7 +45,7 @@
         
                                 </div>
                                 @if (overallData.length>0) {
-                                <h3>{{overallData[0].totalCategories}}</h3> }
+                                <h3 class="text-xl md:text-2xl font-semibold text-0063D0">{{overallData[0].totalCategories}}</h3> }
                                 <p>Total categories</p>
     
                             </div>
@@ -62,7 +62,7 @@
         
                                 </div>
                                 @if (overallData.length>0) {
-                                <h3>{{overallData[0].totalRevenue}}</h3> }
+                                <h3 class="text-xl md:text-2xl font-semibold text-008961">{{overallData[0].totalRevenue}}</h3> }
                                 <p>Total revenue</p>
     
                             </div>
@@ -74,7 +74,7 @@
 
                 </div>
             </div>
-            <div class="w-[58%]">
+            <div class="w-full md:w-[56%]">
                 <div class="mt-[26px]">
                     <div class="m-4 bg-white rounded-xl">
                         <div class="m-4">
@@ -103,20 +103,18 @@
             </div>
     
         </div>
-        <div class="flex">
-            <div class="w-1/4 ">
+        <div class=" md:flex flex-wrap ">
+            <div class="w-full md:w-[24%]  ">
                 <div class="m-4 bg-white rounded-xl">
-                    <h1 class="text-center text-2xl font-semibold bg-titles py-4">Orders Status</h1>
-                    <div >
+                   
+                    <div class="py-6">
                         <app-status-diagram></app-status-diagram>
 
-                    </div>
-
-                    
+                    </div>  
                 </div>
             </div>
-            <div class="w-3/4">
-                <div class="m-4 bg-white rounded-xl">
+            <div class="w-full md:w-[75%]  ">
+                <div class="m-4 bg-white rounded-xl py-3">
                     <div class="flex justify-between p-4">
                         <h2 class="text-2xl font-semibold bg-titles ">Revenue</h2>
                         <div class="flex">
@@ -136,32 +134,73 @@
     
         </div>
         <div>
-            <div class="flex">
-                <div class="w-1/2">
+            <div class=" md:flex flex-wrap">
+                <div class="w-full md:w-1/2">
                     <div class="m-4 bg-white rounded-xl">
                         <div class="p-4">
                             <h2 class="text-2xl font-semibold bg-titles mb-8">Top Selling Products</h2>
 
                             @for (item of topSellingProducts; track $index) {
-                                <div class="flex justify-between px-[10px] py-[6px] top-selling1 mb-[10px] rounded-lg">
-                                    <div class="flex">
-                                        <p>{{item.title}}</p>
-                                        <p>({{item.price}})</p>
+                                @if ($index == 0) {
+                                    <div class="flex justify-between px-[10px] py-[6px] top-selling1 mb-[10px] rounded-lg">
+                                        <div class="flex">
+                                            <p>{{item.title}}</p>
+                                            <p>({{item.price}})</p>
+                                        </div>
+                                        <div class="flex">
+                                            <p>{{item.sold }}</p>
+                                            <p class="ps-1"> Sales</p>
+                                        </div>
                                     </div>
-                                    <div class="flex">
-                                        <p>{{item.sold }}</p>
-                                        <p class="ps-1"> Sales</p>
+
+                                }@else if ($index == 1) {
+                                    <div class="flex justify-between px-[10px] py-[6px] top-selling2 mb-[10px] rounded-lg">
+                                        <div class="flex">
+                                            <p>{{item.title}}</p>
+                                            <p>({{item.price}})</p>
+                                        </div>
+                                        <div class="flex">
+                                            <p>{{item.sold }}</p>
+                                            <p class="ps-1"> Sales</p>
+                                        </div>
                                     </div>
-                                </div>
+
+                                
+                                }@else if ($index == 2) {
+                                    <div class="flex justify-between px-[10px] py-[6px] top-selling3 mb-[10px] rounded-lg">
+                                        <div class="flex">
+                                            <p>{{item.title}}</p>
+                                            <p>({{item.price}})</p>
+                                        </div>
+                                        <div class="flex">
+                                            <p>{{item.sold }}</p>
+                                            <p class="ps-1"> Sales</p>
+                                        </div>
+                                    </div>
+
+                                }@else {
+                                    <div class="flex justify-between px-[10px] py-[6px] top-selling4 mb-[10px] rounded-lg">
+                                        <div class="flex">
+                                            <p>{{item.title}}</p>
+                                            <p>({{item.price}})</p>
+                                        </div>
+                                        <div class="flex">
+                                            <p>{{item.sold }}</p>
+                                            <p class="ps-1"> Sales</p>
+                                        </div>
+                                    </div>
+
+                                }
 
                             }
+                            
                             
 
                         </div>
                         
                     </div>
                 </div>
-                <div class="w-1/2">
+                <div class="w-full md:w-1/2">
                     <div class="">
                     <div class="m-4 bg-white rounded-xl">
                         <div class="m-4">
@@ -178,6 +217,19 @@
                                 <p>25 Red Roses | Black Wrap</p>
                                 <p class=" mb-2 px-2 ">0 Products</p>
                             </div>
+                            <div class="flex justify-between border-b mb-2">
+                                <p>25 Red Roses | Black Wrap</p>
+                                <p class=" mb-2 px-2 ">0 Products</p>
+                            </div>
+                            <div class="flex justify-between border-b mb-2">
+                                <p>25 Red Roses | Black Wrap</p>
+                                <p class=" mb-2 px-2 ">0 Products</p>
+                            </div>
+                            <div class="flex justify-between border-b mb-2">
+                                <p>25 Red Roses | Black Wrap</p>
+                                <p class=" mb-2 px-2 ">0 Products</p>
+                            </div>
+                            
                             
     
                         </div>

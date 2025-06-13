@@ -1,13 +1,13 @@
 <div class="flex ">
-    <div class="w-[303px] pe-28 ">
+    <div class="max-sm:hidden  md:w-[303px] pe-72 ">
         <div class="fixed ">
             <app-sidebar></app-sidebar>
         </div>
     </div>
     <div class="w-full">
-        <app-navbar-dashboard class="fixed "></app-navbar-dashboard>
+        <app-navbar-dashboard class="fixed w-full z-40"></app-navbar-dashboard>
         <router-outlet ></router-outlet>
-        <app-footer-dashboard></app-footer-dashboard>
+        <app-footer-dashboard ></app-footer-dashboard>
         
     </div>
 

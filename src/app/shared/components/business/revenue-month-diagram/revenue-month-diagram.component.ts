@@ -20,6 +20,7 @@ export class RevenueMonthDiagramComponent implements OnInit ,OnDestroy {
 
   _Revenu=inject(OrderstatusService)
   Revenu:[]=[]
+  RevenuMonthTime:[]=[]
   lineChart: Chart | undefined;
   isBrowser = false;
   getOrderstat !:Subscription
@@ -35,6 +36,7 @@ export class RevenueMonthDiagramComponent implements OnInit ,OnDestroy {
       this.getOrderstat=this._Revenu.getOrderstatus().subscribe({
         next: (data) =>{console.log(data.statistics.monthlyRevenue);
           this.Revenu=data.statistics.monthlyRevenue.map((ele: any) => ele.revenue).reverse()
+          this.RevenuMonthTime=data.statistics.monthlyRevenue.map((ele: any) => ele._id).reverse()
           this.createChart()
         }
         ,
@@ -51,8 +53,12 @@ createChart(){
   this.lineChart = new Chart({
     chart:{type:"areaspline"},
     title: {text: "Revenue by Month"},
+    credits:{
+        text:'',
+        href:''
+      },
     xAxis:{
-      categories: ["Jan", "Feb", "Mar", "Apr", "May"]
+      categories: this.RevenuMonthTime
     },
     series:[
       {name:'',
