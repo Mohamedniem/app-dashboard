@@ -66,7 +66,7 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'Occasions',
+        path: 'occasions',
         loadComponent: () =>
           import(
             './core/pages/occasions-admin/occasions-admin.component'
