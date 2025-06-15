@@ -1,0 +1,64 @@
+<app-search-bar-admin (search)="changeSearchValue($event);" [placeholder]="searchBarPlaceholder()"></app-search-bar-admin>
+<table class="table-auto w-full overflow-hidden rounded-tl-lg rounded-tr-lg my-4">
+    <thead class="bg-gray-100 border-b border-gray-300">
+        <tr>
+            @for (header of tableHeaders; track $index) {
+                <th class="py-2 px-4 font-semibold text-left">{{ header | titlecase }}</th>
+            }
+            <th class="py-2 px-4 font-semibold"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (item of displayedData(); track $index) {
+            <tr class="border-b hover:bg-light-prim-background transition-all">
+                <td class="py-2 px-4 font-semibold">{{ (item?.name | titlecase).split(' ')[0] }}</td>
+                <td class="py-2 px-4 font-normal">{{ item?.productsCount }} products</td>
+                <td class="py-2 px-4 font-normal">
+                <div class="flex justify-end gap-2">
+                    <button (click)="editId.emit(item?._id)" class="bg-blue-200 text-blue-500 py-1 px-2 rounded-md text-sm flex items-center gap-x-2">
+                        <i class="fa-solid fa-pencil"></i>
+                        <span>Edit</span>
+                    </button>
+                    <button (click)="deleteId.emit(item?._id)" class="bg-red-200 text-red-500 py-1 px-2 rounded-md text-sm flex items-center gap-x-2">
+                        <i class="fa-solid fa-trash-can"></i>
+                        <span>Delete</span>
+                    </button>
+                </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="flex justify-center" aria-label="Page navigation example">
+    <div class="flex items-center -space-x-px h-10 gap-x-4 text-base">
+        <button (click)="changePage(1)" class="flex items-center justify-center px-4 h-10 w-10 ms-0 leading-tight text-black bg-white border border-gray-300 rounded-lg hover:bg-light-prim-background transition-all">
+            <span class="sr-only">First</span>
+            <i class="fa-solid fa-chevron-left"></i>
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button (click)="currentPage() > 1 ? changePage(currentPage() - 1) : null" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-black bg-white border border-gray-300 rounded-lg hover:bg-light-prim-background transition-all">
+            <span class="sr-only">Previous</span>
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        @for (page of changePageNumbers(currentPage()); track $index) {
+            @if (isNumber(page)) {
+                <button (click)="changePage(page)"
+                class="flex items-center justify-center px-4 h-10 leading-tight rounded-lg border"
+                [ngClass]="{'bg-primary text-white border-primary': page == this.currentPage(), 'bg-white border-gray-300 text-black hover:bg-light-prim-background transition-all': !(page == this.currentPage())}">
+                {{page}}</button> 
+            }
+            @else if (page == '...') {
+                <p>...</p>
+            }
+        }
+        <button (click)="currentPage() < totalPages() ? changePage(currentPage() + 1) : null" class="flex items-center justify-center px-4 h-10 leading-tight text-black bg-white border border-gray-300 rounded-lg hover:bg-light-prim-background transition-all">
+            <span class="sr-only">Next</span>
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>    
+        <button (click)="changePage(totalPages())" class="flex items-center justify-center px-4 h-10 w-10 leading-tight text-black bg-white border border-gray-300 rounded-lg hover:bg-light-prim-background transition-all">
+            <span class="sr-only">Last</span>
+            <i class="fa-solid fa-chevron-right"></i>
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
