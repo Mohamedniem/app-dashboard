@@ -79,6 +79,13 @@ export const routes: Routes = [
             './shared/components/business/products-admin/products-admin.component'
           ).then((c) => c.ProductsAdminComponent),
       },
+      {path:'**' ,
+    loadComponent: () =>
+      import('./shared/components/UI/notfound/notfound.component').then(
+        (c) => c.NotfoundComponent
+      ),}
     ],
+    
   },
+  
 ];
