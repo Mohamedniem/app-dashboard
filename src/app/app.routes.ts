@@ -57,7 +57,7 @@ export const routes: Routes = [
               ),
           },
           {
-            path: 'update/:categoryId',
+            path: 'update/:id',
             loadComponent: () =>
               import(
                 './core/pages/update-category/update-category.component'
@@ -71,6 +71,29 @@ export const routes: Routes = [
           import(
             './core/pages/occasions-admin/occasions-admin.component'
           ).then((c) => c.OccasionsAdminComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import(
+                './core/pages/all-occasions/all-occasions.component'
+              ).then((c) => c.AllOccasionsComponent),
+          },
+          {
+            path: 'add',
+            loadComponent: () =>
+              import('./core/pages/add-occasion/add-occasion.component').then(
+                (c) => c.AddOccasionComponent
+              ),
+          },
+          {
+            path: 'update/:id',
+            loadComponent: () =>
+              import(
+                './core/pages/update-occasion/update-occasion.component'
+              ).then((c) => c.UpdateOccasionComponent),
+          },
+        ],
       },
       {
         path: 'Products',

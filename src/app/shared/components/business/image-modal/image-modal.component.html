@@ -1,0 +1,17 @@
+
+
+<div id="default-modal"  class="fixed inset-0 z-50 flex justify-center items-center bg-black/50">
+  
+  <div class="bg-white rounded-lg w-full max-w-2xl">
+    <!-- Header -->
+    <div class="flex justify-between p-4 border-b">
+      <h3 class="text-lg font-semibold">Occasion Image</h3>
+      <button (click)="onClose()" class="text-gray-500 hover:text-red-500">✕</button>
+    </div>
+
+    <!-- Body -->
+    <div class="p-4">
+      <img [src]="imageSrc" alt="Occasion Image" class="w-full rounded" />
+    </div>
+  </div>
+</div>

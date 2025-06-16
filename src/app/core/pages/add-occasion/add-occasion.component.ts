@@ -1,24 +1,24 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { AdminInputComponent } from "../../../shared/components/business/admin-input/admin-input.component";
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CategoriesService } from '../../services/categories/categories.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { OccasionsService } from '../../services/occasions/occasions.service';
 
 
 @Component({
-  selector: 'app-add-category',
+  selector: 'app-add-occasion',
   standalone: true,
   imports: [AdminInputComponent, ReactiveFormsModule],
-  templateUrl: './add-category.component.html',
-  styleUrl: './add-category.component.scss'
+  templateUrl: './add-occasion.component.html',
+  styleUrl: './add-occasion.component.scss'
 })
-export class AddCategoryComponent implements OnInit{
+export class AddOccasionComponent implements OnInit{
 
   private readonly _formBuilder = inject(FormBuilder);
-  private readonly _categoriesService = inject(CategoriesService);
+  private readonly _occasionsService = inject(OccasionsService);
   private readonly _destroyRef = inject(DestroyRef);
 
-  addCategoryForm!:FormGroup;
+  addOccasionForm!:FormGroup;
 
   ngOnInit(): void {
     this.createForm();
@@ -26,27 +26,27 @@ export class AddCategoryComponent implements OnInit{
 
   onFileChange(file: any): void {
     if (file && file.type.startsWith('image/')) {
-      this.addCategoryForm.patchValue({ image: file });
+      this.addOccasionForm.patchValue({ image: file });
     };
   };
 
   createForm():void {
-    this.addCategoryForm = this._formBuilder.group({
+    this.addOccasionForm = this._formBuilder.group({
       name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
       image: [null, [Validators.required]]
     });
   };
 
   // Feature not working due to missing super admin credentials
-  addCatSubmit(): void {
-    console.log(this.addCategoryForm.value);
-    this._categoriesService.addCategory(this.addCategoryForm.value).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
+  addOccasionSubmit(): void {
+    console.log(this.addOccasionForm.value);
+    this._occasionsService.addOccasion(this.addOccasionForm.value).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
       next: (res) => {
-        console.log('Category added successfully:', res);
-        this.addCategoryForm.reset();
+        console.log('Occasion added successfully:', res);
+        this.addOccasionForm.reset();
       },
       error: (error) => {
-        console.error('Error adding category:', error);
+        console.error('Error adding occasion:', error);
       }
     });
   };

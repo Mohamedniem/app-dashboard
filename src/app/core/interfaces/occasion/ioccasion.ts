@@ -1,18 +1,18 @@
-export interface IGetCategoriesResponse {
+export interface IGetOccasionsResponse {
   message: string;
   metadata: IMetadata;
-  categories: ICategory[];
+  occasions: IOccasion[];
 }
-export interface IGetCategoryResponse {
+export interface IGetOccasionResponse {
   message: string;
-  category: ICategory;
+  occasion: IOccasion;
 }
 export interface IErrorResponse {
   message: string;
   error: string;
 }
 
-export interface ICategory {
+export interface IOccasion {
   _id: string;
   name: string;
   slug: string;
@@ -27,3 +27,4 @@ export interface IMetadata {
   totalPages: number;
   totalItems: number;
 }
+

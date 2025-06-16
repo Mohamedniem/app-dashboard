@@ -45,8 +45,8 @@ export class AllCategoriesComponent {
     this._router.navigate(['maindashboard/categories/add']);
   }
 
-  deleteCategory(categoryId: string): void {
-    this._categoriesService.deleteCategory(categoryId)
+  deleteCategory(id: string): void {
+    this._categoriesService.deleteCategory(id)
       .pipe(takeUntilDestroyed(this._destroyRef))
       .subscribe({
         next: () => {
@@ -58,8 +58,8 @@ export class AllCategoriesComponent {
       });
   }
 
-  updateCategory(categoryId: string): void {
-    this._router.navigate(['maindashboard/categories/update', categoryId]);
+  updateCategory(id: string): void {
+    this._router.navigate(['maindashboard/categories/update', id]);
   }
 
 }

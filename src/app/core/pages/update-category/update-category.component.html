@@ -12,10 +12,13 @@
         [placeholder]="category.name | titlecase">
     </app-admin-input>
     <div class="w-full flex justify-end">
-        <button class="border border-gray-300 p-2 rounded-lg text-blue-500 flex gap-x-2 items-center w-full md:w-fit">
+        <button (click)="openModal()" class="border border-gray-300 p-2 rounded-lg text-blue-500 flex gap-x-2 items-center w-full md:w-fit">
             <i class="fa-regular fa-file-image"></i>
             <span class="text-sm">View Category Image</span>
         </button>
     </div>
 </div>
+@if (isModalOpen()) {
+    <app-image-modal [imageSrc]="category.image" (close)="closeModal()"></app-image-modal>
+}
 }

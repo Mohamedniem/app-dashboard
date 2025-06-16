@@ -1,4 +1,4 @@
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CategoriesService } from '../../services/categories/categories.service';
@@ -6,11 +6,12 @@ import { ICategory } from '../../interfaces/category/icategory';
 import { TitleCasePipe } from '@angular/common';
 import { AdminInputComponent } from "../../../shared/components/business/admin-input/admin-input.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ImageModalComponent } from "../../../shared/components/business/image-modal/image-modal.component";
 
 @Component({
   selector: 'app-update-category',
   standalone: true,
-  imports: [TitleCasePipe, AdminInputComponent, ReactiveFormsModule, FormsModule],
+  imports: [TitleCasePipe, AdminInputComponent, ReactiveFormsModule, FormsModule, ImageModalComponent],
   templateUrl: './update-category.component.html',
   styleUrl: './update-category.component.scss'
 })
@@ -23,6 +24,8 @@ export class UpdateCategoryComponent implements OnInit {
   categoryId!: string ;
   category!: ICategory;
 
+  isModalOpen = signal<boolean>(false);
+
   ngOnInit(): void {
     this.getCategory();
   }
@@ -33,7 +36,7 @@ export class UpdateCategoryComponent implements OnInit {
   }
   getCategoryIdFromUrl(): void {
     this._activatedRoute.paramMap.pipe(takeUntilDestroyed(this._destroyRef)).subscribe((params) => {
-      this.categoryId = params.get('categoryId') || '';
+      this.categoryId = params.get('id') || '';
     });
   };
   getCategoryFromBackend(): void {
@@ -62,6 +65,13 @@ export class UpdateCategoryComponent implements OnInit {
         console.error('Error updating category:', err);
       }
     });
+  };
+
+  openModal(): void {
+    this.isModalOpen.set(true);
+  };
+  closeModal(): void {
+    this.isModalOpen.set(false);
   };
 
 }

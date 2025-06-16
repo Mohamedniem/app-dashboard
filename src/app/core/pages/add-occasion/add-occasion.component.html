@@ -1,0 +1,28 @@
+<h1 class="font-semibold text-2xl">Add a new Occasion</h1>
+<div class="flex flex-col w-6/12 gap-y-12">
+  <form class="flex flex-col justify-between md:gap-y-20" [formGroup]="addOccasionForm" (ngSubmit)="addOccasionSubmit()">
+    <div class="flex flex-col gap-y-4">
+      <app-admin-input
+        class="border-none border-0 w-full"
+        type="text"
+        id="'name'"
+        label="name"
+        formControlName="name"
+        placeholder="Enter occasion name"
+        [isRequired]="true"
+      ></app-admin-input>
+      <app-admin-input
+        class="w-full"
+        type="file"
+        id="occImg"
+        label="Occasion image"
+        (fileChange)="onFileChange($event)"
+        parent="occasion"
+        accept="image/*"
+      ></app-admin-input>
+    </div>
+    <button type="submit" class="bg-primary text-white rounded-lg py-2 w-full">
+      Add occasion
+    </button>
+  </form>
+</div>
