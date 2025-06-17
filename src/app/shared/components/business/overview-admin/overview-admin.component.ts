@@ -7,7 +7,7 @@ import { Ioverall } from '../../../../core/interfaces/ioverall';
 import { AllCateogriesService } from '../../../services/all-cateogries.service';
 import { IallCateogries } from '../../../../core/interfaces/iall-cateogries';
 import { ScrollerModule } from 'primeng/scroller';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ProductsService } from '../../../services/products.service';
 import { Itopselling } from '../../../../core/interfaces/itopselling';
 import { Subscription } from 'rxjs';
@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-overview-admin',
   standalone: true,
-  imports: [StatusDiagramComponent , RouterOutlet, RouterLink ,ScrollerModule],
+  imports: [StatusDiagramComponent , RouterOutlet, RouterLink ,ScrollerModule ,RouterLinkActive],
   templateUrl: './overview-admin.component.html',
   styleUrl: './overview-admin.component.scss'
 })
