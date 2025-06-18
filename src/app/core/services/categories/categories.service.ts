@@ -35,13 +35,13 @@ export class CategoriesService {
 
   // Feature not working due to missing super admin credentials
   // Cannot get response to build an interface
-  updateCategory(id: string, data: any): Observable<any> {
+  updateCategory(id: string, data: FormData): Observable<any> {
     return this._httpClient.put(`${environment.baseUrl}api/v1/categories/${id}`, data);
   };
 
   // Feature not working due to missing super admin credentials
   // Cannot get response to build an interface
-  addCategory(category: object):Observable<any>{
+  addCategory(category: FormData):Observable<any>{
     return this._httpClient.post(`${environment.baseUrl}api/v1/categories`, category);
   };
 }

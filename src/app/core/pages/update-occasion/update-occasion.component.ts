@@ -56,22 +56,24 @@ export class UpdateOccasionComponent implements OnInit {
   };
   // Feature not working due to missing super admin credentials
   updateOccasion(event: any): void {
-    if (!this.occasionId) {
-      return;
-    }
-    const updatedOccasion = {
-      name: event.target.value,
-      image: this.occasion.image
-    };
-    this._occasionsService.updateOccasion(this.occasionId, updatedOccasion).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
-      next: (res) => {
+  if (!this.occasionId) {
+    return;
+  }
+  const formData = new FormData();
+  formData.append('name', event.target.value);
+  formData.append('image', this.occasion.image);
+  this._occasionsService.updateOccasion(this.occasionId, formData)
+    .pipe(takeUntilDestroyed(this._destroyRef))
+    .subscribe({
+      next: () => {
         this.getOccasionFromBackend();
       },
       error: (err) => {
         console.error('Error updating occasion:', err);
       }
     });
-  };
+}
+
 
   openModal(): void {
     this.isModalOpen.set(true);

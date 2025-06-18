@@ -53,19 +53,21 @@ export class UpdateCategoryComponent implements OnInit {
   };
   // Feature not working due to missing super admin credentials
   updateCategory(event: any): void {
-    const updatedCategory = {
-      name: event.target.value,
-      image: this.category.image
-    };
-    this._categoriesService.updateCategory(this.categoryId, updatedCategory).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
-      next: (res) => {
+  const formData = new FormData();
+  formData.append('name', event.target.value);
+  formData.append('image', this.category.image);
+  this._categoriesService.updateCategory(this.categoryId, formData)
+    .pipe(takeUntilDestroyed(this._destroyRef))
+    .subscribe({
+      next: () => {
         this.getCategoryFromBackend();
       },
       error: (err) => {
         console.error('Error updating category:', err);
       }
     });
-  };
+}
+
 
   openModal(): void {
     this.isModalOpen.set(true);

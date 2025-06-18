@@ -36,13 +36,13 @@ export class OccasionsService {
   
     // Feature not working due to missing super admin credentials
     // Cannot get response to build an interface
-    updateOccasion(id: string, data: any): Observable<any> {
+    updateOccasion(id: string, data: FormData): Observable<any> {
       return this._httpClient.put(`${environment.baseUrl}api/v1/occasions/${id}`, data);
     };
   
     // Feature not working due to missing super admin credentials
     // Cannot get response to build an interface
-    addOccasion(occasion: object):Observable<any>{
+    addOccasion(occasion: FormData):Observable<any>{
       return this._httpClient.post(`${environment.baseUrl}api/v1/occasions`, occasion);
     };
 }

@@ -39,15 +39,19 @@ export class AddOccasionComponent implements OnInit{
 
   // Feature not working due to missing super admin credentials
   addOccasionSubmit(): void {
-    console.log(this.addOccasionForm.value);
-    this._occasionsService.addOccasion(this.addOccasionForm.value).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
-      next: (res) => {
-        console.log('Occasion added successfully:', res);
-        this.addOccasionForm.reset();
-      },
-      error: (error) => {
-        console.error('Error adding occasion:', error);
-      }
-    });
-  };
+  const formData = new FormData();
+  formData.append('name', this.addOccasionForm.get('name')?.value);
+  formData.append('image', this.addOccasionForm.get('image')?.value);
+
+  this._occasionsService.addOccasion(formData).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
+    next: (res) => {
+      console.log('Occasion added successfully:', res);
+      this.addOccasionForm.reset();
+    },
+    error: (error) => {
+      console.error('Error adding occasion:', error);
+    }
+  });
+}
+
 }
