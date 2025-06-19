@@ -1,0 +1,119 @@
+<h1 class="font-semibold text-2xl">Add a new Product</h1>
+<div class="flex flex-col w-8/12 gap-y-12 my-8">
+  <form
+    class="flex flex-col justify-between md:gap-y-20"
+    [formGroup]="addProductForm"
+    (ngSubmit)="addProductSubmit()"
+  >
+    <div class="flex flex-col gap-y-4 my-0">
+      <app-admin-input
+        class="border-none border-0 w-full py-0"
+        type="text"
+        id="'title'"
+        label="title"
+        formControlName="title"
+        placeholder="Enter product title"
+        [isRequired]="true"
+      ></app-admin-input>
+
+      <app-admin-input
+        type="textarea"
+        id="'description'"
+        label="description"
+        formControlName="description"
+        placeholder="Enter product description"
+        [isRequired]="true"
+      ></app-admin-input>
+
+      <div class="flex justify-between gap-x-1">
+        <app-admin-input
+          class="border-none border-0 py-0"
+          type="number"
+          id="price"
+          label="price"
+          formControlName="price"
+          placeholder="Example: 5500"
+          [isRequired]="true"
+        ></app-admin-input>
+
+        <app-admin-input
+          class="border-none border-0 py-0"
+          type="number"
+          id="discount"
+          label="discount"
+          formControlName="discount"
+          placeholder="Example: 5"
+          [isRequired]="true"
+        ></app-admin-input>
+
+        <app-admin-input
+          class="border-none border-0 py-0"
+          type="number"
+          id="priceAfterDiscount"
+          label="Price After Discount"
+          formControlName="priceAfterDiscount"
+          placeholder="Example: 5"
+          [isRequired]="true"
+        ></app-admin-input>
+      </div>
+
+      <app-admin-input
+        class="border-none border-0 py-0"
+        type="number"
+        id="quantity"
+        label="quantity"
+        formControlName="quantity"
+        placeholder="Example: 200"
+        [isRequired]="true"
+      ></app-admin-input>
+
+      <div class="flex justify-between gap-x-4">
+        <app-admin-input
+          class="w-full"
+          type="file"
+          id="coverImg"
+          label="Product cover image"
+          (fileChange)="onFileChange($event)"
+          parent="product"
+          accept="image/*"
+        ></app-admin-input>
+        <app-admin-input
+          class="w-full"
+          type="file"
+          id="galleryImg"
+          label="Product gallery"
+          (fileChange)="onFileChange($event)"
+          parent="product"
+          accept="image/*"
+        ></app-admin-input>
+      </div>
+
+      <app-admin-input
+        class="border-none border-0 py-0"
+        type="dropdown"
+        id="category"
+        label="category"
+        formControlName="category"
+        placeholder="Select a category"
+        [isRequired]="true"
+        [options]="categoryList"
+      ></app-admin-input>
+      <app-admin-input
+        class="border-none border-0 py-0"
+        type="dropdown"
+        id="occasion"
+        label="occasion"
+        formControlName="occasion"
+        placeholder="Select a occasion"
+        [isRequired]="true"
+        [options]="occasionList"
+      ></app-admin-input>
+    </div>
+    <button
+      type="submit"
+      class="bg-primary text-white rounded-lg py-2 my-0 w-full"
+    >
+      Add product
+    </button>
+  </form>
+</div>

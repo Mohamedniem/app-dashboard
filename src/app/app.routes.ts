@@ -1,3 +1,4 @@
+import { AllProductsComponent } from './core/pages/all-products/all-products.component';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -57,7 +58,7 @@ export const routes: Routes = [
               ),
           },
           {
-            path: 'update/:categoryId',
+            path: 'update/:id',
             loadComponent: () =>
               import(
                 './core/pages/update-category/update-category.component'
@@ -66,18 +67,64 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'Occasions',
+        path: 'occasions',
         loadComponent: () =>
           import(
             './core/pages/occasions-admin/occasions-admin.component'
           ).then((c) => c.OccasionsAdminComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import(
+                './core/pages/all-occasions/all-occasions.component'
+              ).then((c) => c.AllOccasionsComponent),
+          },
+          {
+            path: 'add',
+            loadComponent: () =>
+              import('./core/pages/add-occasion/add-occasion.component').then(
+                (c) => c.AddOccasionComponent
+              ),
+          },
+          {
+            path: 'update/:id',
+            loadComponent: () =>
+              import(
+                './core/pages/update-occasion/update-occasion.component'
+              ).then((c) => c.UpdateOccasionComponent),
+          },
+        ],
       },
       {
-        path: 'Products',
+        path: 'products',
         loadComponent: () =>
           import(
             './shared/components/business/products-admin/products-admin.component'
           ).then((c) => c.ProductsAdminComponent),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import(
+                './core/pages/all-products/all-products.component'
+              ).then((c) => c.AllProductsComponent),
+          },
+          {
+            path: 'add',
+            loadComponent: () =>
+              import('./core/pages/add-product/add-product.component').then(
+                (c) => c.AddProductComponent
+              ),
+          },
+          {
+            path: 'update/:id',
+            loadComponent: () =>
+              import(
+                './core/pages/update-product/update-product.component'
+              ).then((c) => c.UpdateProductComponent),
+          }
+        ]
       },
       {path:'**' ,
     loadComponent: () =>

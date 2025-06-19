@@ -1,12 +1,12 @@
-
 export interface IGetCategoriesResponse {
   message: string;
+  metadata: IMetadata;
   categories: ICategory[];
-};
+}
 export interface IGetCategoryResponse {
   message: string;
   category: ICategory;
-};
+}
 export interface IErrorResponse {
   message: string;
   error: string;
@@ -23,3 +23,7 @@ export interface ICategory {
   productsCount: number;
 }
 
+export interface IMetadata {
+  totalPages: number;
+  totalItems: number;
+}

@@ -39,15 +39,19 @@ export class AddCategoryComponent implements OnInit{
 
   // Feature not working due to missing super admin credentials
   addCatSubmit(): void {
-    console.log(this.addCategoryForm.value);
-    this._categoriesService.addCategory(this.addCategoryForm.value).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
-      next: (response) => {
-        console.log('Category added successfully:', response);
-        this.addCategoryForm.reset();
-      },
-      error: (error) => {
-        console.error('Error adding category:', error);
-      }
-    });
-  };
+  const formData = new FormData();
+  formData.append('name', this.addCategoryForm.get('name')?.value);
+  formData.append('image', this.addCategoryForm.get('image')?.value);
+
+  this._categoriesService.addCategory(formData).pipe(takeUntilDestroyed(this._destroyRef)).subscribe({
+    next: (res) => {
+      console.log('Category added successfully:', res);
+      this.addCategoryForm.reset();
+    },
+    error: (error) => {
+      console.error('Error adding category:', error);
+    }
+  });
+}
+
 }

@@ -1,5 +1,77 @@
 @switch(type) {
-  @case('text') {
+  @case('file') {
+    <label [for]="id" class="flex items-center gap-x-1 font-medium cursor-pointer">
+      <span>{{ label | titlecase }}
+        @if (isRequired) {
+          <span class="text-red-600">*</span>
+        }
+      </span>
+    </label>
+    <label class="border border-gray-300 rounded-xl py-4 px-4 w-full flex flex-row-reverse cursor-pointer">
+      <input
+        [id]="id"
+        type="file"
+        [accept]="accept"
+        [disabled]="isDisabled"
+        (change)="onFileChange($event)"
+        class="w-full hidden"
+        (blur)="onBlur()"
+      />
+      <div class="flex gap-x-2 items-center justify-center">
+        <i class="fa-regular fa-file-image text-gray-400"></i>
+        <span class="text-primary">Upload file</span>
+      </div>
+    </label>
+  }
+
+  @case ('textarea') {
+    <label [for]="id" class="flex items-center gap-x-1 font-medium">
+      <span>{{ label | titlecase }}</span>
+      @if (isRequired) {
+        <span class="text-red-600">*</span>
+      }
+    </label>
+
+    <div class="border border-gray-300 rounded-xl py-2 px-4 w-full flex {{ classes }}">
+      <textarea
+        [id]="id"
+        [disabled]="isDisabled"
+        [placeholder]="placeholder"
+        class="w-full resize-none border-none focus:outline-none focus:ring-0"
+        [value]="value"
+        (input)="onInputChange($event)"
+        (blur)="onBlur()"
+      ></textarea>
+    </div>
+  }
+
+  @case ('dropdown') {
+    <label [for]="id" class="flex items-center gap-x-1 font-medium">
+      <span>{{ label | titlecase }}</span>
+      @if (isRequired) {
+        <span class="text-red-600">*</span>
+      }
+    </label>
+
+    <div class="border border-gray-300 rounded-xl py-2 px-4 w-full flex {{ classes }}">
+      <select
+        placholder
+        [id]="id"
+        [disabled]="isDisabled"
+        class="w-full resize-none border-none focus:outline-none focus:ring-0"
+        [value]="value"
+        (input)="onInputChange($event)"
+        (blur)="onBlur()"
+      >
+      <option value="0" selected >{{placeholder}}</option>
+      @for (option of options; track $index) {
+          <option [value]="option">{{option.name | titlecase}}</option>
+      }
+    </select>
+    </div>
+  }
+
+  @default {
     <label [for]="id" class="flex items-center gap-x-1 font-medium">
       <span>{{ label | titlecase }}</span>
       @if (isRequired) {
@@ -19,26 +91,5 @@
         (blur)="onBlur()"
       />
     </div>
-  }
-
-  @case('file') {
-    <label [for]="id" class="flex items-center gap-x-1 font-medium cursor-pointer">
-      <span>{{ parent | titlecase }} image<span class="text-red-600">*</span></span>
-    </label>
-    <label class="border border-gray-300 rounded-xl py-4 px-4 w-full flex flex-row-reverse cursor-pointer">
-      <input
-        [id]="id"
-        type="file"
-        [accept]="accept"
-        [disabled]="isDisabled"
-        (change)="onFileChange($event)"
-        class="w-full hidden"
-        (blur)="onBlur()"
-      />
-      <div class="flex gap-x-2 items-center justify-center">
-        <i class="fa-regular fa-file-image text-gray-400"></i>
-        <span class="text-primary">Upload file</span>
-      </div>
-    </label>
   }
 }

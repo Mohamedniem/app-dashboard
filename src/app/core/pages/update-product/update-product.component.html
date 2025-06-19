@@ -1,0 +1,24 @@
+@if (product) {
+<div class="flex justify-between">
+    <h1 class="font-semibold text-2xl">Update Product: {{product.title | titlecase}}</h1>
+</div>
+<div class="mt-4 w-full md:w-2/3">
+    <app-admin-input
+        (change)="updateProduct($event)"
+        [isRequired]="true"
+        type="text"
+        label="Name"
+        [id]="product._id"
+        [placeholder]="product.title| titlecase">
+    </app-admin-input>
+    <div class="w-full flex justify-end">
+        <button (click)="openModal()" class="border border-gray-300 p-2 rounded-lg text-blue-500 flex gap-x-2 items-center w-full md:w-fit">
+            <i class="fa-regular fa-file-image"></i>
+            <span class="text-sm">View product Image</span>
+        </button>
+    </div>
+</div>
+@if (isModalOpen()) {
+    <app-image-modal [imageSrc]="product.images[0]" (close)="closeModal()"></app-image-modal>
+}
+}

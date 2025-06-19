@@ -1,0 +1,26 @@
+@if (occasion) {
+<div class="flex justify-between">
+    <h1 class="font-semibold text-2xl">Update Occasion: {{occasion.name | titlecase}}</h1>
+</div>
+<div class="mt-4 w-full md:w-2/3">
+    <div class="outline-none ring-0 focus:outline-none focus:ring-0">
+        <app-admin-input
+            (change)="updateOccasion($event)"
+            [isRequired]="true"
+            type="text"
+            label="Name"
+            [id]="occasion._id"
+            [placeholder]="occasion.name | titlecase">
+        </app-admin-input>
+    </div>
+    <div class="w-full flex justify-end">
+        <button (click)="openModal()" class="border border-gray-300 p-2 rounded-lg text-blue-500 flex gap-x-2 items-center w-full md:w-fit">
+            <i class="fa-regular fa-file-image"></i>
+            <span class="text-sm">View Occasion Image</span>
+        </button>
+    </div>
+</div>
+@if (isModalOpen()) {
+    <app-image-modal [imageSrc]="occasion.image" (close)="closeModal()"></app-image-modal>
+}
+}

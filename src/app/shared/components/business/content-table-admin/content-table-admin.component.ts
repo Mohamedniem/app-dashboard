@@ -14,6 +14,8 @@ export class ContentTableAdminComponent implements OnInit {
 
   @Input({ required: true }) tableType!: string;
   @Input({ required: true }) tableHeaders!: string[];
+  @Input({ required: true }) tableCols!: string[];
+  @Input({ required: true }) tableUnits!: string[];
   @Input({ required: true }) data!: object[];
 
 

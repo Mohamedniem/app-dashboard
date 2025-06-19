@@ -1,0 +1,23 @@
+<div class="flex justify-between">
+    <h1 class="font-semibold text-2xl">All Products</h1>
+    <button
+        (click)="addProduct()"
+        class="bg-primary text-white py-1 px-2 rounded-lg flex justify-between items-center gap-x-2"
+    >
+        <span class="text-xl leading-none">+</span>
+        <span class="hidden md:inline">Add a new product</span>
+    </button>
+</div>
+@if (productList().length) {
+<div class="w-full">
+    <app-content-table-admin
+        (deleteId)="deleteProduct($event)"
+        (editId)="updateProduct($event)"
+        [tableType]="'category'"
+        [tableHeaders]="['name', 'price', 'stock', 'sales', 'ratings']"
+        [tableCols]="['title', 'price', 'quantity', 'sold', 'ratings']"
+        [tableUnits]="['', 'EGP', '', '', '']"
+        [data]="productList()"
+    ></app-content-table-admin>
+</div>
+}
