@@ -1,23 +1,20 @@
-<div class="flex justify-between">
-    <h1 class="font-semibold text-2xl">All Categories</h1>
-    <button
-        (click)="addCategory()"
-        class="bg-primary text-white py-1 px-2 rounded-lg flex justify-between items-center gap-x-2"
-    >
-        <span class="text-xl leading-none">+</span>
-        <span class="hidden md:inline">Add a new category</span>
-    </button>
+
+<div class="m-10">
+    <div class="mt-24 bg-white">
+        <div class="flex justify-between  ">
+            <h1 class="font-semibold text-2xl">All Categories</h1>
+            <button (click)="addCategory()" class="bg-primary text-white py-1 px-2 rounded-lg flex justify-between items-center gap-x-2">
+                <span class="text-xl leading-none">+</span>
+                <span class="hidden md:inline">Add new category</span>
+            </button>
+        </div>
+        @if (categoryList().length) {
+            <div class="w-full">
+                <app-content-table-admin (deleteId)="deleteCategory($event)" (editId)="updateCategory($event)" [tableType]="'category'" [tableHeaders]="['name', 'products']" [data]="categoryList()" ></app-content-table-admin>
+            </div>
+        }
+
+    </div>
+
 </div>
-@if (categoryList().length) {
-<div class="w-full">
-    <app-content-table-admin
-        (deleteId)="deleteCategory($event)"
-        (editId)="updateCategory($event)"
-        [tableType]="'category'"
-        [tableHeaders]="['name', 'products']"
-        [tableCols]="['name', 'productsCount']"
-        [tableUnits]="['', 'products']"
-        [data]="categoryList()"
-    ></app-content-table-admin>
-</div>
-}
+
