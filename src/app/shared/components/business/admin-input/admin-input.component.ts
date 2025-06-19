@@ -5,6 +5,8 @@ import {
   NgControl,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { ICategory } from '../../../../core/interfaces/category/icategory';
+import { IOccasion } from '../../../../core/interfaces/occasion/ioccasion';
 
 @Component({
   selector: 'app-admin-input',
@@ -33,6 +35,8 @@ export class AdminInputComponent implements ControlValueAccessor {
   @Input() accept: string = '.jpg, .png, .jpeg';
   @Input() parent: string = '';
   @Output() fileChange = new EventEmitter<File>();
+
+  @Input() options: ICategory[] | IOccasion[] = [];
 
   // Internal state
   value: any = '';
@@ -68,7 +72,7 @@ export class AdminInputComponent implements ControlValueAccessor {
   const file = input.files?.[0];
   if (file) {
     this.fileChange.emit(file);
-    this.onChange(file); // Also notify Angular form control of the change
+    this.onChange(file);
   }
 }
 

@@ -1,4 +1,3 @@
-import { AllProductsComponent } from './core/pages/all-products/all-products.component';
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
@@ -107,22 +106,22 @@ export const routes: Routes = [
             path: '',
             loadComponent: () =>
               import(
-                './core/pages/all-products/all-products.component'
-              ).then((c) => c.AllProductsComponent),
+                './core/pages/all-occasions/all-occasions.component'
+              ).then((c) => c.AllOccasionsComponent),
           },
           {
             path: 'add',
             loadComponent: () =>
-              import('./core/pages/add-product/add-product.component').then(
-                (c) => c.AddProductComponent
+              import('./core/pages/add-occasion/add-occasion.component').then(
+                (c) => c.AddOccasionComponent
               ),
           },
           {
             path: 'update/:id',
             loadComponent: () =>
               import(
-                './core/pages/update-product/update-product.component'
-              ).then((c) => c.UpdateProductComponent),
+                './core/pages/update-occasion/update-occasion.component'
+              ).then((c) => c.UpdateOccasionComponent),
           }
         ]
       },

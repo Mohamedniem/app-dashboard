@@ -1,6 +1,6 @@
 <app-search-bar-admin (search)="changeSearchValue($event);" [placeholder]="searchBarPlaceholder()"></app-search-bar-admin>
 <table class="table-auto w-full overflow-hidden rounded-tl-lg rounded-tr-lg my-4">
-    <thead class="bg-gray-100 border-b border-gray-300">
+    <thead class="w-full bg-gray-100 border-b border-gray-300">
         <tr>
             @for (header of tableHeaders; track $index) {
                 <th class="py-2 px-4 font-semibold text-left">{{ header | titlecase }}</th>
@@ -9,21 +9,30 @@
         </tr>
     </thead>
     <tbody>
-        @for (item of displayedData(); track $index) {
+        @for (row of displayedData(); track $index) {
             <tr class="border-b hover:bg-light-prim-background transition-all">
-                <td class="py-2 px-4 font-semibold">{{ (item?.name | titlecase).split(' ')[0] }}</td>
-                <td class="py-2 px-4 font-normal">{{ item?.productsCount }} products</td>
+                @for (col of tableCols; track $index) {
+                    @if (col == 'ratings') {
+                        <td class="py-2 px-4">{{row.rateAvg}}/5
+                            <span class="text-xs">({{row.rateCount}})</span> 
+                        </td>
+                    } @else if (col == 'name' || col == 'title') {
+                        <td class="py-2 px-4" [ngClass]="{'font-semibold': $index == 0}">{{row[col] | titlecase }} </td>
+                    } @else {
+                        <td class="py-2 px-4" [ngClass]="{'font-semibold': $index == 0}">{{row[col]}} {{tableUnits[$index]}}</td>
+                    }
+                }
                 <td class="py-2 px-4 font-normal">
-                <div class="flex justify-end gap-2">
-                    <button (click)="editId.emit(item?._id)" class="bg-blue-200 text-blue-500 py-1 px-2 rounded-md text-sm flex items-center gap-x-2">
-                        <i class="fa-solid fa-pencil"></i>
-                        <span>Edit</span>
-                    </button>
-                    <button (click)="deleteId.emit(item?._id)" class="bg-red-200 text-red-500 py-1 px-2 rounded-md text-sm flex items-center gap-x-2">
-                        <i class="fa-solid fa-trash-can"></i>
-                        <span>Delete</span>
-                    </button>
-                </div>
+                    <div class="flex justify-end gap-2">
+                        <button (click)="editId.emit(row?._id)" class="bg-blue-200 text-blue-500 py-1 px-2 rounded-md text-sm flex items-center gap-x-2">
+                            <i class="fa-solid fa-pencil"></i>
+                            <span>Edit</span>
+                        </button>
+                        <button (click)="deleteId.emit(row?._id)" class="bg-red-200 text-red-500 py-1 px-2 rounded-md text-sm flex items-center gap-x-2">
+                            <i class="fa-solid fa-trash-can"></i>
+                            <span>Delete</span>
+                        </button>
+                    </div>
                 </td>
             </tr>
         }
