@@ -126,6 +126,13 @@ export const routes: Routes = [
           }
         ]
       },
+      {path:'**' ,
+    loadComponent: () =>
+      import('./shared/components/UI/notfound/notfound.component').then(
+        (c) => c.NotfoundComponent
+      ),}
     ],
+    
   },
+  
 ];

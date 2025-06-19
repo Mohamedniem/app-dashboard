@@ -4,7 +4,7 @@
             <div class="w-full  md:w-[44%] ">
                 <div class="mt-[26px] max-sm:mx-4 md:ms-4">
                     <div class="grid grid-cols-2 gap-4 p-[26px]  bg-white rounded-xl">
-                        <div class=" bg-admin rounded-xl" >
+                        <div class=" bg-totalproduct rounded-xl" >
                             <div class="p-4">
                                 <div class="pb-3">
                                     <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +20,7 @@
                             </div>
     
                         </div>
-                        <div class=" bg-admin  rounded-xl">
+                        <div class=" bg-Totalorders  rounded-xl">
                             <div class="p-4">
                                 <div class="pb-3">
                                     <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,7 +36,7 @@
                             
     
                         </div>
-                        <div class=" bg-admin rounded-xl">
+                        <div class=" bg-Totalcategories rounded-xl">
                             <div class="p-4">
                                 <div class="pb-3">
                                     <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -52,7 +52,7 @@
                             
     
                         </div>
-                        <div class=" bg-admin rounded-xl">
+                        <div class=" bg-Totalrevenue rounded-xl">
     
                             <div class="p-4">
                                 <div class="pb-3">
@@ -62,7 +62,7 @@
         
                                 </div>
                                 @if (overallData.length>0) {
-                                <h3 class="text-xl md:text-2xl font-semibold text-008961">{{overallData[0].totalRevenue}}</h3> }
+                                <h3 class="text-xl md:text-2xl font-semibold text-008961">{{overallData[0].totalRevenue}} <span class="text-base">EGP</span></h3> }
                                 <p>Total revenue</p>
     
                             </div>
@@ -77,7 +77,7 @@
             <div class="w-full md:w-[56%]">
                 <div class="mt-[26px]">
                     <div class="m-4 bg-white rounded-xl">
-                        <div class="m-4">
+                        <div class="m-4 pb-4">
                             <h2 class="h1 pt-4 mb-4 bg-titles text-2xl font-semibold">All Categories</h2>
 
                            <p-virtualscroller [items]="allCateogries" [itemSize]="50" scrollHeight="255px" styleClass=" border-surface" >
@@ -114,16 +114,16 @@
                 </div>
             </div>
             <div class="w-full md:w-[75%]  ">
-                <div class="m-4 bg-white rounded-xl py-3">
+                <div class="m-4 bg-white rounded-xl">
                     <div class="flex justify-between p-4">
                         <h2 class="text-2xl font-semibold bg-titles ">Revenue</h2>
                         <div class="flex">
-                            <a routerLink="monthly">Monthly</a>
-                            <a routerLink="weekly">Last Week</a>
+                            <a class="revenu-time" routerLink="monthly" routerLinkActive="revenu-time-active">Monthly</a>
+                            <a class="px-3 revenu-time" routerLink="weekly" routerLinkActive="revenu-time-active">Last Week</a>
                         </div>
 
                     </div>
-                    <div class="py-12">
+                    <div class="py-[75px]">
                        <router-outlet></router-outlet>
     
                     </div>
@@ -133,7 +133,7 @@
             </div>
     
         </div>
-        <div>
+        <div class="mb-10">
             <div class=" md:flex flex-wrap">
                 <div class="w-full md:w-1/2">
                     <div class="m-4 bg-white rounded-xl">
@@ -203,7 +203,7 @@
                 <div class="w-full md:w-1/2">
                     <div class="">
                     <div class="m-4 bg-white rounded-xl">
-                        <div class="m-4">
+                        <div class="m-4 pb-3">
                             <h2 class="h1 pt-4 mb-4 bg-titles text-2xl font-semibold">Low Stock Products</h2>
                             <div class="flex justify-between border-b mb-2">
                                 <p>25 Red Roses | Black Wrap</p>
@@ -229,6 +229,7 @@
                                 <p>25 Red Roses | Black Wrap</p>
                                 <p class=" mb-2 px-2 ">0 Products</p>
                             </div>
+                         
                             
                             
     
